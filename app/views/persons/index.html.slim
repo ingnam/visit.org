@@ -1,0 +1,42 @@
+.container
+  .navbar.navbar-default
+    .navbar-header
+      a.navbar-brand href="#"  Visit.org
+    .navbar-collapse.collapse
+      ul.nav.navbar-nav
+        li
+          a href="#"  HOME
+        li
+          a href="#"  ABOUT
+        li
+          a href="#"  CONTACT
+  .jumbotron
+    = form_tag import_persons_path, multipart: true, class: 'csv-form' do
+      = file_field_tag :file
+      br
+      = submit_tag 'Import CSV', class: 'btn btn-primary'
+    - flash.each do |key, value|
+      br
+      .alert.alert-success
+        strong 
+          = value
+    h1 Persons
+    table.table
+      thead
+        tr
+          th  Name
+          th  Date
+          th  Number
+          th  Description
+      tbody
+        - @persons.each do |person|
+          tr
+            td
+              = person.name
+            td
+              = person.date
+            td
+              = person.number
+            td
+              = person.description
+        
